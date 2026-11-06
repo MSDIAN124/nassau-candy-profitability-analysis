@@ -14,6 +14,33 @@ st.set_page_config(
     page_icon="🍫",
     layout="wide"
 )
+st.markdown("""
+<style>
+    /* Main title */
+    h1 {
+        color: #FFFFFF !important;
+        font-weight: 800 !important;
+    }
+
+    /* Subheadings */
+    h2, h3 {
+        color: #E2E8F0 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Captions and muted text */
+    .stCaption {
+        color: #CBD5E1 !important;
+    }
+
+    /* Markdown headings */
+    [data-testid="stMarkdownContainer"] h1,
+    [data-testid="stMarkdownContainer"] h2,
+    [data-testid="stMarkdownContainer"] h3 {
+        color: #FFFFFF !important;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 st.title("Nassau Candy Distributor")
 st.subheader("Product Line Profitability & Margin Performance Analysis")
