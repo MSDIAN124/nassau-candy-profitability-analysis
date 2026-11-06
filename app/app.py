@@ -62,41 +62,328 @@ except Exception as e:
 
 
 # --------------------------------------------------
+# --------------------------------------------------
 # SIDEBAR FILTERS
 # --------------------------------------------------
 
-st.sidebar.header("Dashboard Filters")
+# Premium sidebar styling
+st.markdown("""
+<style>
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #190540 0%, #100326 100%);
+    border-right: 1px solid #3B236B;
+}
+
+[data-testid="stSidebar"] h2 {
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+[data-testid="stSidebar"] label {
+    color: #E9DFFF !important;
+    font-weight: 600;
+}
+
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+    color: #E9DFFF !important;
+}
+
+[data-testid="stSidebar"] hr {
+    border-color: #49316F;
+}
+
+[data-testid="stSidebar"] input,
+[data-testid="stSidebar"] [data-baseweb="select"] {
+    border-radius: 9px;
+}
+
+[data-testid="stSidebar"] .stButton button {
+    background: linear-gradient(90deg, #7C3AED, #9333EA);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-weight: 700;
+    width: 100%;
+    padding: 9px;
+}
+
+[data-testid="stSidebar"] .stButton button:hover {
+    background: #6D28D9;
+    color: white;
+    border: none;
+}
+
+/* MAIN DASHBOARD BACKGROUND */
+.stApp {
+    background:
+        linear-gradient(
+            120deg,
+            rgba(25, 5, 64, 0.86),
+            rgba(16, 3, 38, 0.82)
+        ),
+        url("https://images.unsplash.com/photo-1744576409106-7b7685ed6cb4?auto=format&fit=crop&fm=jpg&q=80&w=2400");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* TRANSPARENT MAIN CONTAINER */
+[data-testid="stAppViewContainer"] {
+    background: transparent;
+}
+
+[data-testid="stHeader"] {
+    background: rgba(16, 3, 38, 0.25);
+}
+
+/* GLASSMORPHISM KPI CARDS */
+[data-testid="stMetric"] {
+    background: rgba(55, 25, 90, 0.48);
+    border: 1px solid rgba(216, 180, 254, 0.35);
+    border-radius: 18px;
+    padding: 18px 20px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+/* KPI LABELS */
+[data-testid="stMetricLabel"] {
+    color: #E9DFFF;
+}
+
+/* KPI VALUES */
+[data-testid="stMetricValue"] {
+    color: #FFFFFF;
+    font-weight: 750;
+}
+
+/* KPI DELTA */
+[data-testid="stMetricDelta"] {
+    font-weight: 650;
+}
+
+
+/* CUSTOM KPI CARDS */
+
+.custom-kpi-card {
+    background: rgba(55, 25, 90, 0.55);
+    border: 1px solid rgba(216, 180, 254, 0.35);
+    border-radius: 18px;
+    padding: 22px;
+    min-height: 155px;
+    margin-bottom: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-kpi-card .kpi-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 14px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-kpi-card .kpi-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.custom-kpi-card .kpi-title {
+    color: #E9DFFF;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    text-align: center !important;
+    width: 100%;
+    display: block;
+}
+
+.custom-kpi-card .kpi-value {
+    color: #FFFFFF;
+    font-size: 25px;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+    text-align: center !important;
+    width: 100%;
+    display: block;
+}
+
+/* CENTER ALIGN EXECUTIVE KPI CARDS */
+
+.custom-kpi-card {
+    text-align: center;
+}
+
+.kpi-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 14px auto;
+}
+
+.kpi-title {
+    text-align: center;
+}
+
+.kpi-value {
+    text-align: center;
+}
+
+/* CENTER ALIGN PRODUCT METRICS */
+
+[data-testid="stMetric"] {
+    text-align: center;
+}
+
+[data-testid="stMetricLabel"],
+[data-testid="stMetricValue"],
+[data-testid="stMetricDelta"] {
+    justify-content: center;
+    text-align: center;
+}
+
+/* FORCE CENTER ALIGNMENT FOR KPI CARDS */
+
+.custom-kpi-card {
+    text-align: center !important;
+}
+
+.custom-kpi-card .kpi-icon {
+    display: block !important;
+    margin: 0 auto 14px auto !important;
+}
+
+.custom-kpi-card .kpi-title {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+}
+
+.custom-kpi-card .kpi-value {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+}
+
+/* CENTER ALIGNMENT - MODULE KPI LABELS */
+
+div[data-testid="stMetric"] {
+    text-align: center !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    justify-content: center !important;
+    width: 100% !important;
+    text-align: center !important;
+}
+
+div[data-testid="stMetricLabel"] > div {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+div[data-testid="stMetricValue"] {
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+div[data-testid="stMetricDelta"] {
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+</style>
+
+""", unsafe_allow_html=True)
+
 
 min_date = df["Order Date"].min().date()
 max_date = df["Order Date"].max().date()
 
-selected_dates = st.sidebar.date_input(
-    "Order Date Range",
-    value=(min_date, max_date),
-    min_value=min_date,
-    max_value=max_date
-)
+def reset_filters():
+    st.session_state["date_filter"] = (min_date, max_date)
+    st.session_state["division_filter"] = sorted(
+        df["Division"].dropna().unique()
+    )
+    st.session_state["margin_filter"] = 0
+    st.session_state["product_filter"] = ""
 
-divisions = sorted(df["Division"].dropna().unique())
+with st.sidebar:
 
-selected_divisions = st.sidebar.multiselect(
-    "Select Division",
-    options=divisions,
-    default=divisions
-)
+    st.markdown("## 🎛️ FILTER PANEL")
+    st.caption("Customize your profitability analysis")
+    st.divider()
 
-margin_threshold = st.sidebar.slider(
-    "Minimum Gross Margin (%)",
-    min_value=0,
-    max_value=100,
-    value=0,
-    step=5
-)
+    st.markdown("### 📅 Date Selection")
 
-product_search = st.sidebar.text_input(
-    "Search Product",
-    placeholder="Enter product name..."
-)
+    selected_dates = st.date_input(
+        "Order Date Range",
+        value=(min_date, max_date),
+        min_value=min_date,
+        max_value=max_date,
+        key="date_filter"
+    )
+
+    st.divider()
+
+    st.markdown("### 🏢 Business Division")
+
+    divisions = sorted(df["Division"].dropna().unique())
+
+    selected_divisions = st.multiselect(
+        "Select Division",
+        options=divisions,
+        default=divisions,
+        key="division_filter"
+    )
+
+    st.divider()
+
+    st.markdown("### 📊 Margin Threshold")
+
+    margin_threshold = st.slider(
+        "Minimum Gross Margin (%)",
+        min_value=0,
+        max_value=100,
+        value=0,
+        step=5,
+        key="margin_filter"
+    )
+
+    st.divider()
+
+    st.markdown("### 🔎 Product Search")
+
+    product_search = st.text_input(
+        "Search Product",
+        placeholder="Enter product name...",
+        key="product_filter"
+    )
+
+    st.divider()
+
+    st.caption("Reset all dashboard filters")
+
+    st.button(
+    "↺ Reset Filters",
+    use_container_width=True,
+    on_click=reset_filters
+    )
 
 
 # --------------------------------------------------
@@ -147,41 +434,84 @@ overall_margin = (
 # EXECUTIVE KPI CARDS
 # --------------------------------------------------
 
+
+import base64
+
+ICON_PATH = PROJECT_ROOT / "assets" / "icons"
+
+
+def get_icon_base64(filename):
+    icon_file = ICON_PATH / filename
+
+    with open(icon_file, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+
+def render_kpi_card(title, value, icon):
+    icon_data = get_icon_base64(icon)
+
+    st.markdown(
+        f"""
+        <div class="custom-kpi-card">
+            <div class="kpi-icon">
+                <img src="data:image/png;base64,{icon_data}">
+            </div>
+            <div class="kpi-title">{title}</div>
+            <div class="kpi-value">{value}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
 st.markdown("## Business Performance Overview")
 
+# First row
 c1, c2, c3 = st.columns(3)
 
-c1.metric(
-    "Total Revenue",
-    f"${total_revenue:,.2f}"
-)
+with c1:
+    render_kpi_card(
+        "Total Revenue",
+        f"${total_revenue:,.2f}",
+        "total_revenue.png"
+    )
 
-c2.metric(
-    "Gross Profit",
-    f"${total_profit:,.2f}"
-)
+with c2:
+    render_kpi_card(
+        "Gross Profit",
+        f"${total_profit:,.2f}",
+        "gross_profit.png"
+    )
 
-c3.metric(
-    "Total Cost",
-    f"${total_cost:,.2f}"
-)
+with c3:
+    render_kpi_card(
+        "Total Cost",
+        f"${total_cost:,.2f}",
+        "total_cost.png"
+    )
 
+# Second row
 c4, c5 = st.columns(2)
 
-c4.metric(
-    "Gross Margin",
-    f"{overall_margin:.2f}%"
-)
+with c4:
+    render_kpi_card(
+        "Gross Margin",
+        f"{overall_margin:.2f}%",
+        "gross_margin.png"
+    )
 
-c5.metric(
-    "Total Orders",
-    f"{total_orders:,}"
-)
+with c5:
+    render_kpi_card(
+        "Total Orders",
+        f"{total_orders:,}",
+        "total_orders.png"
+    )
 
 st.caption(
     f"Units sold: {total_units:,.0f} | "
     f"Records analysed: {len(filtered_df):,}"
 )
+
 
 st.divider()
 
@@ -240,18 +570,18 @@ else:
         product_summary["Gross_Margin_%"].idxmin()
     ]
 
-    p1, p2 = st.columns(2)
+    # Top-level product metrics
 
-    p1.metric(
-        "Highest Gross Profit Product",
-        best_product["Product Name"],
-        f"${best_product['Gross_Profit']:,.2f}"
+    st.metric(
+        label="Highest Gross Profit Product",
+        value=best_product["Product Name"],
+        delta=f"${best_product['Gross_Profit']:,.2f}"
     )
 
-    p2.metric(
-        "Lowest Margin Product",
-        lowest_margin_product["Product Name"],
-        f"{lowest_margin_product['Gross_Margin_%']:.2f}%"
+    st.metric(
+        label="Lowest Margin Product",
+        value=lowest_margin_product["Product Name"],
+        delta=f"{lowest_margin_product['Gross_Margin_%']:.2f}%"
     )
 
     # Product profitability chart
@@ -274,8 +604,51 @@ else:
     )
 
     fig_product.update_layout(
-        xaxis_tickangle=-35,
-        legend_title="Financial Metric"
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(25,5,64,0.25)",
+    font=dict(
+        family="Arial",
+        color="#E9DFFF",
+        size=12
+    ),
+    title_font=dict(
+        size=19,
+        color="#FFFFFF"
+    ),
+    xaxis=dict(
+        showgrid=False,
+        tickangle=-35,
+        color="#D8B4FE"
+    ),
+    yaxis=dict(
+        gridcolor="rgba(216,180,254,0.12)",
+        zeroline=False,
+        color="#D8B4FE"
+    ),
+    legend=dict(
+        title="Financial Metric",
+        orientation="h",
+        y=1.12,
+        x=0
+    ),
+    margin=dict(l=25, r=25, t=80, b=80),
+    bargap=0.25,
+    height=450
+    )
+
+    fig_product.update_traces(
+        marker_line_width=0
+    )
+
+    fig_product.update_traces(
+        marker_color="#8B5CF6",
+        selector=dict(name="Revenue")
+    )
+
+    fig_product.update_traces(
+        marker_color="#22D3EE",
+        selector=dict(name="Gross_Profit")
     )
 
     st.plotly_chart(fig_product, use_container_width=True)
@@ -298,6 +671,34 @@ else:
             "Product Name": "Product"
         }
     )
+    fig_margin.update_layout(
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(25,5,64,0.25)",
+    font=dict(
+        family="Arial",
+        color="#E9DFFF",
+        size=12
+    ),
+    title_font=dict(size=19, color="#FFFFFF"),
+    xaxis=dict(
+        title="Gross Margin (%)",
+        gridcolor="rgba(216,180,254,0.12)",
+        color="#D8B4FE"
+    ),
+    yaxis=dict(
+        showgrid=False,
+        color="#D8B4FE"
+    ),
+    margin=dict(l=25, r=25, t=65, b=35),
+    height=480
+    )
+
+    fig_margin.update_traces(
+        marker_color="#A78BFA",
+        marker_line_width=0,
+        opacity=0.9
+    )
 
     st.plotly_chart(fig_margin, use_container_width=True)
 
@@ -315,8 +716,51 @@ else:
         }
     )
 
+    styled_products = (
+    display_products.style
+    .format({
+        "Revenue": "${:,.2f}",
+        "Gross_Profit": "${:,.2f}",
+        "Cost": "${:,.2f}",
+        "Gross Margin (%)": "{:.2f}%",
+        "Profit per Unit ($)": "${:,.2f}"
+    }, na_rep="-")
+    .set_properties(**{
+        "background-color": "#241044",
+        "color": "#F3E8FF",
+        "border-color": "#4C267A",
+        "text-align": "center"
+    })
+    .set_table_styles([
+        {
+            "selector": "th",
+            "props": [
+                ("background-color", "#4C1D95"),
+                ("color", "#FFFFFF"),
+                ("font-weight", "bold"),
+                ("text-align", "center"),
+                ("border", "1px solid #6D28D9")
+            ]
+        },
+        {
+            "selector": "td",
+            "props": [
+                ("padding", "10px"),
+                ("border", "1px solid #4C267A")
+            ]
+        },
+        {
+            "selector": "table",
+            "props": [
+                ("border-collapse", "collapse"),
+                ("width", "100%")
+            ]
+        }
+    ])
+)
+
     st.dataframe(
-        display_products,
+        styled_products,
         use_container_width=True,
         hide_index=True
     )
@@ -371,6 +815,31 @@ with d1:
         text_auto=".2s"
     )
 
+    fig_division_revenue.update_layout(
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(25,5,64,0.25)",
+    font=dict(family="Arial", color="#E9DFFF", size=12),
+    title_font=dict(size=19, color="#FFFFFF"),
+    xaxis=dict(showgrid=False, color="#D8B4FE"),
+    yaxis=dict(
+        title="Revenue ($)",
+        gridcolor="rgba(216,180,254,0.12)",
+        color="#D8B4FE",
+        zeroline=False
+    ),
+    margin=dict(l=25, r=25, t=65, b=35),
+    height=400,
+    showlegend=False
+   )
+
+    fig_division_revenue.update_traces(
+        marker_color="#8B5CF6",
+        marker_line_width=0,
+        opacity=0.9,
+        textposition="outside",
+        textfont=dict(color="#FFFFFF", size=12)
+    )
     st.plotly_chart(
         fig_division_revenue,
         use_container_width=True
@@ -387,6 +856,31 @@ with d2:
         text_auto=".2s"
     )
 
+    fig_division_profit.update_layout(
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(25,5,64,0.25)",
+    font=dict(family="Arial", color="#E9DFFF", size=12),
+    title_font=dict(size=19, color="#FFFFFF"),
+    xaxis=dict(showgrid=False, color="#D8B4FE"),
+    yaxis=dict(
+        title="Gross Profit ($)",
+        gridcolor="rgba(216,180,254,0.12)",
+        color="#D8B4FE",
+        zeroline=False
+    ),
+    margin=dict(l=25, r=25, t=65, b=35),
+    height=400,
+    showlegend=False
+    )
+
+    fig_division_profit.update_traces(
+        marker_color="#22D3EE",
+        marker_line_width=0,
+        opacity=0.9,
+        textposition="outside",
+        textfont=dict(color="#FFFFFF", size=12)
+)
     st.plotly_chart(
         fig_division_profit,
         use_container_width=True
@@ -396,13 +890,42 @@ with d2:
 st.subheader("Division Gross Margin Comparison")
 
 fig_division_margin = px.bar(
-    division_summary.sort_values(
-        "Gross_Margin_%", ascending=False
+        division_summary.sort_values(
+            "Gross_Margin_%", ascending=False
+        ),
+        x="Division",
+        y="Gross_Margin_%",
+        text_auto=".2f",
+        title="Gross Margin (%) by Division"
+)
+
+fig_division_margin.update_layout(
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(25,5,64,0.25)",
+    font=dict(family="Arial", color="#E9DFFF", size=12),
+    title_font=dict(size=19, color="#FFFFFF"),
+    xaxis=dict(
+        showgrid=False,
+        color="#D8B4FE"
     ),
-    x="Division",
-    y="Gross_Margin_%",
-    text_auto=".2f",
-    title="Gross Margin (%) by Division"
+    yaxis=dict(
+        title="Gross Margin (%)",
+        gridcolor="rgba(216,180,254,0.12)",
+        color="#D8B4FE",
+        zeroline=False
+    ),
+    margin=dict(l=25, r=25, t=65, b=35),
+    height=400,
+    showlegend=False
+)
+
+fig_division_margin.update_traces(
+    marker_color="#A78BFA",
+    marker_line_width=0,
+    opacity=0.9,
+    textposition="outside",
+    textfont=dict(color="#FFFFFF", size=12)
 )
 
 st.plotly_chart(
@@ -413,10 +936,58 @@ st.plotly_chart(
 
 st.subheader("Division Performance Details")
 
+display_divisions = division_summary.sort_values(
+    "Gross_Profit", ascending=False
+).copy()
+
+styled_divisions = (
+    display_divisions.style
+    .format({
+        "Orders": "{:,.0f}",
+        "Units_Sold": "{:,.0f}",
+        "Revenue": "${:,.2f}",
+        "Cost": "${:,.2f}",
+        "Gross_Profit": "${:,.2f}",
+        "Gross_Margin_%": "{:.2f}%",
+        "Revenue_Contribution_%": "{:.2f}%",
+        "Profit_Contribution_%": "{:.2f}%"
+    })
+    .set_properties(**{
+        "background-color": "#241044",
+        "color": "#F3E8FF",
+        "border-color": "#4C267A",
+        "text-align": "center"
+    })
+    .set_table_styles([
+        {
+            "selector": "th",
+            "props": [
+                ("background-color", "#4C1D95"),
+                ("color", "#FFFFFF"),
+                ("font-weight", "bold"),
+                ("text-align", "center"),
+                ("border", "1px solid #6D28D9")
+            ]
+        },
+        {
+            "selector": "td",
+            "props": [
+                ("padding", "10px"),
+                ("border", "1px solid #4C267A")
+            ]
+        },
+        {
+            "selector": "table",
+            "props": [
+                ("border-collapse", "collapse"),
+                ("width", "100%")
+            ]
+        }
+    ])
+)
+
 st.dataframe(
-    division_summary.sort_values(
-        "Gross_Profit", ascending=False
-    ),
+    styled_divisions,
     use_container_width=True,
     hide_index=True
 )
@@ -530,9 +1101,44 @@ else:
     )
 
     fig_cost_margin.update_layout(
-        xaxis_tickangle=-35,
-        legend_title_text="Metric",
-        height=480
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(25,5,64,0.25)",
+    font=dict(
+        family="Arial",
+        color="#E9DFFF",
+        size=12
+    ),
+    title_font=dict(
+        size=19,
+        color="#FFFFFF"
+    ),
+    xaxis=dict(
+        title="Product",
+        showgrid=False,
+        tickangle=-35,
+        color="#D8B4FE"
+    ),
+    yaxis=dict(
+        title="Percentage (%)",
+        gridcolor="rgba(216,180,254,0.12)",
+        color="#D8B4FE",
+        zeroline=False
+    ),
+    legend=dict(
+        title="Financial Metric",
+        orientation="h",
+        y=1.15,
+        x=0
+    ),
+    margin=dict(l=25, r=25, t=90, b=100),
+    height=500,
+    bargap=0.25
+    )
+
+    fig_cost_margin.update_traces(
+        marker_line_width=0,
+        opacity=0.9
     )
 
     st.plotly_chart(fig_cost_margin, use_container_width=True)
@@ -587,6 +1193,41 @@ else:
             subset=numeric_columns,
             **{"text-align": "center"}
         )
+
+                .set_properties(
+            **{
+                "background-color": "#241044",
+                "color": "#F3E8FF",
+                "border-color": "#4C267A",
+                "text-align": "center"
+            }
+        )
+        .set_table_styles([
+            {
+                "selector": "th",
+                "props": [
+                    ("background-color", "#4C1D95"),
+                    ("color", "#FFFFFF"),
+                    ("font-weight", "bold"),
+                    ("text-align", "center"),
+                    ("border", "1px solid #6D28D9")
+                ]
+            },
+            {
+                "selector": "td",
+                "props": [
+                    ("padding", "10px"),
+                    ("border", "1px solid #4C267A")
+                ]
+            },
+            {
+                "selector": "table",
+                "props": [
+                    ("border-collapse", "collapse"),
+                    ("width", "100%")
+                ]
+            }
+        ])
     )
 
     st.dataframe(
@@ -708,9 +1349,33 @@ else:
     )
 
     fig_revenue_pareto.update_layout(
-        xaxis_tickangle=-35,
-        yaxis_range=[0, 105],
-        height=450
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(25,5,64,0.25)",
+    font=dict(family="Arial", color="#E9DFFF", size=12),
+    title_font=dict(size=19, color="#FFFFFF"),
+    xaxis=dict(
+        title="Product",
+        showgrid=False,
+        tickangle=-35,
+        color="#D8B4FE"
+    ),
+    yaxis=dict(
+        title="Cumulative Revenue (%)",
+        range=[0, 105],
+        gridcolor="rgba(216,180,254,0.12)",
+        color="#D8B4FE",
+        ticksuffix="%"
+    ),
+    margin=dict(l=25, r=25, t=75, b=100),
+    height=480,
+    showlegend=False
+    )
+
+    fig_revenue_pareto.update_traces(
+        marker_line_width=0,
+        opacity=0.9,
+        hovertemplate="<b>%{x}</b><br>Cumulative Revenue: %{y:.2f}%<extra></extra>"
     )
 
     st.plotly_chart(
@@ -741,9 +1406,33 @@ else:
     )
 
     fig_profit_pareto.update_layout(
-        xaxis_tickangle=-35,
-        yaxis_range=[0, 105],
-        height=450
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(25,5,64,0.25)",
+    font=dict(family="Arial", color="#E9DFFF", size=12),
+    title_font=dict(size=19, color="#FFFFFF"),
+    xaxis=dict(
+        title="Product",
+        showgrid=False,
+        tickangle=-35,
+        color="#D8B4FE"
+    ),
+    yaxis=dict(
+        title="Cumulative Gross Profit (%)",
+        range=[0, 105],
+        gridcolor="rgba(216,180,254,0.12)",
+        color="#D8B4FE",
+        ticksuffix="%"
+    ),
+    margin=dict(l=25, r=25, t=75, b=100),
+    height=480,
+    showlegend=False
+    )
+
+    fig_profit_pareto.update_traces(
+        marker_line_width=0,
+        opacity=0.9,
+        hovertemplate="<b>%{x}</b><br>Cumulative Gross Profit: %{y:.2f}%<extra></extra>"
     )
 
     st.plotly_chart(
@@ -754,40 +1443,118 @@ else:
     # Top products summary
     st.subheader("Revenue Pareto Details")
 
-    st.dataframe(
-        revenue_pareto[
-            [
-                "Product Name",
-                "Division",
-                "Revenue",
-                "Revenue_Contribution_%",
-                "Cumulative_Revenue_%"
-            ]
-        ].style.format({
-            "Revenue": "{:,.2f}",
+    revenue_details = revenue_pareto[
+    [
+        "Product Name",
+        "Division",
+        "Revenue",
+        "Revenue_Contribution_%",
+        "Cumulative_Revenue_%"
+    ]
+    ].copy()
+
+    styled_revenue_details = (
+        revenue_details.style
+        .format({
+            "Revenue": "${:,.2f}",
             "Revenue_Contribution_%": "{:.2f}%",
             "Cumulative_Revenue_%": "{:.2f}%"
-        }),
+        })
+        .set_properties(**{
+            "background-color": "#241044",
+            "color": "#F3E8FF",
+            "border-color": "#4C267A",
+            "text-align": "center"
+        })
+        .set_table_styles([
+            {
+                "selector": "th",
+                "props": [
+                    ("background-color", "#4C1D95"),
+                    ("color", "#FFFFFF"),
+                    ("font-weight", "bold"),
+                    ("text-align", "center"),
+                    ("border", "1px solid #6D28D9")
+                ]
+            },
+            {
+                "selector": "td",
+                "props": [
+                    ("padding", "10px"),
+                    ("border", "1px solid #4C267A")
+                ]
+            },
+            {
+                "selector": "table",
+                "props": [
+                    ("border-collapse", "collapse"),
+                    ("width", "100%")
+                ]
+            }
+        ])
+    )
+
+    st.dataframe(
+        styled_revenue_details,
         use_container_width=True,
         hide_index=True
     )
 
     st.subheader("Gross Profit Pareto Details")
 
-    st.dataframe(
-        profit_pareto[
-            [
-                "Product Name",
-                "Division",
-                "Gross_Profit",
-                "Profit_Contribution_%",
-                "Cumulative_Profit_%"
-            ]
-        ].style.format({
-            "Gross_Profit": "{:,.2f}",
+    profit_details = profit_pareto[
+    [
+        "Product Name",
+        "Division",
+        "Gross_Profit",
+        "Profit_Contribution_%",
+        "Cumulative_Profit_%"
+    ]
+    ].copy()
+
+    styled_profit_details = (
+        profit_details.style
+        .format({
+            "Gross_Profit": "${:,.2f}",
             "Profit_Contribution_%": "{:.2f}%",
             "Cumulative_Profit_%": "{:.2f}%"
-        }),
+        })
+        .set_properties(**{
+            "background-color": "#241044",
+            "color": "#F3E8FF",
+            "border-color": "#4C267A",
+            "text-align": "center"
+        })
+        .set_table_styles([
+            {
+                "selector": "th",
+                "props": [
+                    ("background-color", "#4C1D95"),
+                    ("color", "#FFFFFF"),
+                    ("font-weight", "bold"),
+                    ("text-align", "center"),
+                    ("border", "1px solid #6D28D9")
+                ]
+            },
+            {
+                "selector": "td",
+                "props": [
+                    ("padding", "10px"),
+                    ("border", "1px solid #4C267A")
+                ]
+            },
+            {
+                "selector": "table",
+                "props": [
+                    ("border-collapse", "collapse"),
+                    ("width", "100%")
+                ]
+            }
+        ])
+    )
+
+    st.dataframe(
+        styled_profit_details,
         use_container_width=True,
         hide_index=True
     )
