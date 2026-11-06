@@ -1,4 +1,4 @@
-# Nassau Candy Distributor – Data Quality Audit
+# Nassau Candy Distributor ï¿½ Data Quality Audit
 
 ## 1. Dataset Overview
 - Source: Official Unified Mentor dataset
@@ -42,6 +42,12 @@ Duplicate candidates will be flagged and retained unless source-level confirmati
 - Median shipping delay: 1,274 days
 
 Shipping dates are unusually distant from order dates. Original values will be preserved pending source clarification.
+
+- Mean shipping delay: 1,320.84 days
+- Records with shipping delays exceeding 30 days: 10,194 (100%)
+- Records with shipping delays exceeding 365 days: 10,194 (100%)
+
+These calculated intervals should not be interpreted as actual delivery performance because the source shipping dates require clarification.
 
 ## 6. Product and Category Validation
 - 15 products have consistent Product ID mappings.

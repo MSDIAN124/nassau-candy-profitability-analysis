@@ -58,7 +58,11 @@ Kazookles recorded a gross margin of only 7.69%, with cost representing 92.31% o
 
 This product is a priority candidate for detailed cost and pricing review.
 
-Other products with comparatively low margins include Fun Dip, Nerds, SweeTARTS, and Lickable Wallpaper. Low-volume products should be assessed cautiously before making business decisions.
+Other products with comparatively low margins include Fun Dip, Nerds, SweeTARTS, and Lickable Wallpaper.
+
+The product-level cost versus sales analysis further highlighted differences in product cost structures. Kazookles had the highest cost-to-sales ratio among the 15 analyzed products, indicating limited gross profit relative to its recorded sales.
+
+These findings support further investigation into product pricing and cost efficiency. Low-volume products should be assessed cautiously before making business decisions.
 
 ### 3.4 Monthly Performance
 
@@ -70,6 +74,27 @@ Across 24 months:
 - Lowest monthly margin was 64.54% in March 2024.
 
 The results indicate relatively limited historical variation in monthly gross margin.
+
+### 3.5 Geographic Profitability
+
+Geographic profitability analysis was conducted across four sales regions and 59 states/provinces to understand how revenue and gross profit were distributed geographically.
+
+| Region | Revenue | Gross Profit | Gross Margin |
+|---|---:|---:|---:|
+| Pacific | 46,301.53 | 30,485.94 | 65.84% |
+| Atlantic | 41,197.24 | 26,973.70 | 65.47% |
+| Interior | 32,037.60 | 21,282.49 | 66.43% |
+| Gulf | 22,247.26 | 14,700.67 | 66.08% |
+
+Key findings:
+
+- Pacific generated the highest revenue, contributing 32.66% of total portfolio revenue.
+- Interior recorded the highest regional gross margin at 66.43%.
+- Atlantic recorded the lowest regional gross margin at 65.47%.
+- California was the highest-revenue state, generating 27,917.40, equivalent to 19.69% of total revenue.
+- Regional gross margins were relatively consistent, ranging from 65.47% to 66.43%.
+
+The findings provide additional visibility into geographic revenue and profitability distribution. They do not independently establish shipping congestion or delivery inefficiencies, as shipment transit-time and delay data were not evaluated.
 
 ## 4. Priority Recommendations
 
@@ -92,13 +117,24 @@ An interactive Streamlit dashboard was developed with four analytical modules:
 
 The dashboard provides date, division, minimum margin, and product search filters. Its calculations and filtering behavior were validated against the processed dataset.
 
+Additional analytical outputs were generated to support deeper investigation:
+
+- Product-level cost versus sales analysis.
+- Region-wise profitability analysis.
+- State-wise profitability analysis.
+- Monthly gross margin and volatility analysis.
+
+The supplementary analyses were saved as CSV reports, along with an interactive Plotly cost versus sales scatter chart. These outputs extend the project's analytical coverage while retaining the four core Streamlit dashboard modules.
+
 ## 6. Conclusion
 
 The analysis shows that Nassau Candy Distributor's recorded financial performance is strongly concentrated in five Chocolate products. While the overall weighted gross margin is 65.91%, individual product and division margins vary considerably.
 
-The findings highlight the importance of product-level cost monitoring, margin review, and concentration management. The interactive dashboard provides a practical tool for ongoing financial performance monitoring.
+Product-level cost diagnostics identified Kazookles as a priority candidate for cost and pricing investigation. Geographic analysis also showed differences in regional revenue contribution, although gross margins remained relatively consistent across the four regions.
 
-The results should be interpreted in the context of the available dataset and its documented limitations. Further source-data validation and detailed cost information would strengthen future decision-making.
+The findings highlight the importance of product-level cost monitoring, margin review, geographic performance monitoring, and concentration management. The interactive Streamlit dashboard and supplementary analytical reports provide practical tools for ongoing financial performance monitoring.
+
+The results should be interpreted in the context of the available dataset and its documented limitations. Further source-data validation, detailed cost information, and shipment-level operational data would strengthen future decision-making.
 
 ---
 

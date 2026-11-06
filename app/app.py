@@ -1142,6 +1142,93 @@ else:
     )
 
     st.plotly_chart(fig_cost_margin, use_container_width=True)
+    # Cost vs Sales Scatter Plot
+    st.divider()
+    st.subheader("Cost vs Sales — Product-Level Analysis")
+
+    fig_cost_sales = px.scatter(
+        diagnostics,
+        x="Revenue",
+        y="Cost",
+        size="Units_Sold",
+        color="Division",
+        hover_name="Product Name",
+        hover_data={
+            "Revenue": ":,.2f",
+            "Cost": ":,.2f",
+            "Units_Sold": ":,.0f",
+            "Gross_Profit": ":,.2f",
+            "Gross_Margin_%": ":.2f",
+            "Cost_to_Sales_%": ":.2f",
+            "Division": True
+        },
+        size_max=38,
+        color_discrete_sequence=[
+            "#A78BFA",
+            "#22C55E",
+            "#F97316"
+        ],
+        title="Product Revenue vs Cost Distribution",
+        labels={
+            "Revenue": "Revenue",
+            "Cost": "Total Cost",
+            "Units_Sold": "Units Sold",
+            "Division": "Product Division"
+        }
+    )
+
+    fig_cost_sales.update_traces(
+        marker=dict(
+            opacity=0.85,
+            line=dict(
+                width=1,
+                color="#E9DFFF"
+            )
+        )
+    )
+
+    fig_cost_sales.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(25,5,64,0.25)",
+        font=dict(
+            family="Arial",
+            color="#E9DFFF",
+            size=12
+        ),
+        title_font=dict(
+            size=19,
+            color="#FFFFFF"
+        ),
+        xaxis=dict(
+            title="Revenue",
+            showgrid=True,
+            gridcolor="rgba(216,180,254,0.12)",
+            color="#D8B4FE",
+            zeroline=False
+        ),
+        yaxis=dict(
+            title="Total Cost",
+            showgrid=True,
+            gridcolor="rgba(216,180,254,0.12)",
+            color="#D8B4FE",
+            zeroline=False
+        ),
+        legend=dict(
+            title="Division",
+            orientation="h",
+            y=1.12,
+            x=0
+        ),
+        margin=dict(l=25, r=25, t=90, b=60),
+        height=520
+    )
+
+    st.plotly_chart(
+        fig_cost_sales,
+        use_container_width=True
+    )
+
 
     # Margin risk details
     st.subheader("Product Margin Risk Details")
